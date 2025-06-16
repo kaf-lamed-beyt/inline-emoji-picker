@@ -1,0 +1,51 @@
+name: Build & Release Artifact
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  release:
+    runs-on: macos-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install Homebrew dependencies
+        run: |
+          brew install create-dmg
+      - name: Build Xcode project
+        run: |
+          xcodebuild -project inline-emoji-picker/inline-emoji-picker.xcodeproj -scheme "Inline Emoji Picker" -configuration Release -arch x86_64 -arch arm64 -derivedDataPath build
+          mkdir -p dist/inline-emoji-picker
+          cp -R build/Build/Products/Release/Inline\ Emoji\ Picker.app dist/inline-emoji-picker/
+      - name: Code sign app
+        run: |
+          codesign --force --deep --sign - dist/inline-emoji-picker/Inline\ Emoji\ Picker.app
+      - name: Create DMG
+        run: |
+          create-dmg \
+            --volname "Inline Emoji Picker" \
+            --volicon "inline-emoji-picker/Assets.xcassets/VolumeIcon.icns" \
+            --window-pos 200 120 \
+            --window-size 500 300 \
+            --icon-size 100 \
+            --icon "Inline Emoji Picker.app" 100 150 \
+            --app-drop-link 380 150 \
+            "dist/inline-emoji-picker.dmg" \
+            "dist/inline-emoji-picker/"
+      - name: Upload DMG artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: InlineEmojiPicker.dmg
+          path: dist/inline-emoji-picker.dmg
+      - name: Create GitHub Release with DMG and Changelog
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Inline Emoji Picker ${{ github.ref_name }}
+          files: dist/inline-emoji-picker.dmg
+          body_path: inline-emoji-picker/CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
