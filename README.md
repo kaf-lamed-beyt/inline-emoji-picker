@@ -42,7 +42,7 @@ If you run into the error below and you'd still love to use this tool
 
 > Apple could not verify “inline-emoji-picker” is free of malware that may harm your Mac or compromise your privacy.
 
-Open Settings, click **"Privacy & Security"**, scroll to the bottom. Beside **"inline-emoji-picker" was blocked to protect your Mac." you'll see "Open Anyway", click it.
+Open Settings, click **"Privacy & Security"**, scroll to the bottom. Beside **"inline-emoji-picker" was blocked to protect your Mac."** you'll see "Open Anyway", click it.
 
 This happened because, I did not pay the $99/yr fee Apple requests for their Developer Program.
 
