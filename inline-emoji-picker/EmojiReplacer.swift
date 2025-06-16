@@ -44,16 +44,24 @@ class EmojiReplacer {
     
     private func appendToBufferAndReplace(_ character: String) {
         typedBuffer.append(character)
-        
-        for (key, emoji) in emojiMap {
-            if typedBuffer.hasSuffix(key) {
-                replaceLastTyped(key, with: emoji)
-                typedBuffer = ""
-                break
-            }
+
+        if let emoji = emojiMap[typedBuffer] {
+            replaceLastTyped(typedBuffer, with: emoji)
+            typedBuffer = ""
+            return
         }
-        
-        if typedBuffer.count > 15 {
+
+        if character == " " || character == "\n" || character == "\t" {
+            if let match = emojiMap.first(where: { typedBuffer.hasSuffix($0.key + character) }) {
+                replaceLastTyped(match.key + character, with: match.value + character)
+                typedBuffer = ""
+                return
+            }
+
+            typedBuffer = ""
+        }
+
+        if typedBuffer.count > 30 {
             typedBuffer.removeFirst()
         }
     }

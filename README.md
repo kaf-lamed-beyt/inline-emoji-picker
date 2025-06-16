@@ -38,9 +38,18 @@ You can do this by opening Settings, head to **Privacy & Security**, scroll down
 
 If it doesn't work for the first time, you may need to enable it. Look at your menu bar, top-right of your screen, you should see this emoji (😎), toggle it to either enable or disable inline emoji selection/completion.
 
+If you run into the error below and you'd still love to use this tool
+
+> Apple could not verify “inline-emoji-picker” is free of malware that may harm your Mac or compromise your privacy.
+
+Open Settings, click **"Privacy & Security"**, scroll to the bottom. Beside **"inline-emoji-picker" was blocked to protect your Mac." you'll see "Open Anyway", click it.
+
+This happened because, I did not pay the $99/yr fee Apple requests for their Developer Program.
+
 ## To Do
 
-- [] ensure the app icon actually shows. for now, it doesn't, and I've tried all i could to get that working. I'll keep digging though.
+- [ ] ensure the app icon actually shows. for now, it doesn't, and I've tried all i could to get that working. I'll keep digging though.
+- [ ] show a popover with matching emoji key/pairs as you type
 
 ## Contributing
 
