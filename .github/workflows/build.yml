@@ -17,7 +17,7 @@ jobs:
           brew install create-dmg
       - name: Build Xcode project
         run: |
-          xcodebuild -project inline-emoji-picker/inline-emoji-picker.xcodeproj -scheme "Inline Emoji Picker" -configuration Release -arch x86_64 -arch arm64 -derivedDataPath build
+          xcodebuild -project inline-emoji-picker.xcodeproj -scheme "Inline Emoji Picker" -configuration Release -arch x86_64 -arch arm64 -derivedDataPath build
           mkdir -p dist/inline-emoji-picker
           cp -R build/Build/Products/Release/Inline\ Emoji\ Picker.app dist/inline-emoji-picker/
       - name: Code sign app
@@ -27,7 +27,7 @@ jobs:
         run: |
           create-dmg \
             --volname "Inline Emoji Picker" \
-            --volicon "inline-emoji-picker/Assets.xcassets/VolumeIcon.icns" \
+            --volicon "Assets.xcassets/VolumeIcon.icns" \
             --window-pos 200 120 \
             --window-size 500 300 \
             --icon-size 100 \
@@ -46,6 +46,6 @@ jobs:
           tag_name: ${{ github.ref_name }}
           name: Inline Emoji Picker ${{ github.ref_name }}
           files: dist/inline-emoji-picker.dmg
-          body_path: inline-emoji-picker/CHANGELOG.md
+          body_path: CHANGELOG.md
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
