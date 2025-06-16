@@ -30,7 +30,7 @@ One thing that was quite insufferable to get working in this process was getting
 
 ## Usage
 
-To use this, download the installer [here](https://meje.dev/inline-emoji-picker-for-macos) or clone this repo to build a version you'd like for yourself.
+To use this, download the installer [here](https://meje.dev/inline-emoji-picker-for-macos) or clone this repo to build a version you'd like for yourself or just download the dmg file at the root of the repo here.
 
 Once you've done that, open it and drag it into **"Applications"** and try to launch it. You'd be prompted to grant accessibility permissions to the app.
 
